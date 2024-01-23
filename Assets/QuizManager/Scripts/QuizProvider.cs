@@ -9,6 +9,9 @@ class QuizProvider : MonoBehaviour
 {
     public event EventHandler<Dictionary<string, Quiz>> OnGetQuizzes;
 
+    private void Start() {
+        GetQuizzes();
+    }
     public void GetQuizzes() {
         StartCoroutine(GetQuizzesCore());
     }
