@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/QuizManager/QuizUiTemplate/QuestionStyle.uss?fileID=7433441132597879392&amp;guid=151c1ad9e5f7d6d4db203db5c6ae5575&amp;type=3#QuestionStyle" />
+    <ui:VisualElement name="Header" style="flex-shrink: 0; flex-grow: 1;">
+        <ui:VisualElement name="Info" style="flex-direction: row; justify-content: space-between; margin-left: 10px; align-items: center; margin-right: 10px;">
+            <ui:VisualElement name="Difficulty" style="flex-direction: row; margin-right: 10px;">
+                <ui:Label name="DifficultyLabel" text="Dificuldade" class="question-difficulty" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Timer" style="flex-grow: 1; flex-shrink: 1;">
+                <ui:ProgressBar value="0" title="Tempo Restante: 90s" name="TimerBar" high-value="90" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Text" style="flex-shrink: 0; flex-grow: 1;">
+            <ui:Label text="Questão" display-tooltip-when-elided="true" name="QuestionLabel" style="white-space: normal; flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Body" style="flex-direction: column; flex-shrink: 0; flex-grow: 1;">
+        <ui:VisualElement name="Row1" class="row">
+            <ui:Button text="Button" name="AnswerButton1" class="answer-button answer-button-1" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" name="AnswerButton2" class="answer-button answer-button-2" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Row2" class="row">
+            <ui:Button text="Button" display-tooltip-when-elided="true" name="AnswerButton3" class="answer-button answer-button-3" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" name="AnswerButton4" class="answer-button answer-button-4" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
