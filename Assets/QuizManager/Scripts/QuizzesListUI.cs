@@ -6,12 +6,12 @@ using UnityEngine.UIElements;
 
 class QuizzesListUI : MonoBehaviour
 {
-    public UIDocument UIDocument;
-    [SerializeField] private QuizManager QuizManager;
+    [SerializeField] private UIDocument UIDocument;
     [SerializeField] private QuizProvider QuizProvider;
-    public VisualElement Root { get => UIDocument.rootVisualElement; }
+    private VisualElement Root { get => UIDocument.rootVisualElement; }
     private ListView ListView { get => Root.Q<ListView>("QuizzesList"); }
-    public List<Quiz> Quizzes = new();
+    private TextField TextField { get => Root.Q<TextField>("SearchQuiz"); }
+    private List<Quiz> Quizzes = new();
     public event EventHandler<Quiz> OnQuizSelected;
 
     private void Start()
@@ -20,6 +20,12 @@ class QuizzesListUI : MonoBehaviour
         QuizProvider.OnGetQuizzes += LoadQuizzes;
         ListView.selectionType = SelectionType.Single;
         ListView.onItemsChosen += OnQuizChosen;
+        TextField.RegisterCallback<ChangeEvent<string>>(searchChanged);
+    }
+
+    private void searchChanged(ChangeEvent<string> changeEvent) {
+        string search = changeEvent.newValue.ToLower().Trim();
+        ListView.itemsSource = Quizzes.Select((quiz) => quiz.title).Where((title) => title.ToLower().Contains(search)).ToList();
     }
 
     private void OnQuizChosen(IEnumerable<object> objects)
@@ -43,5 +49,6 @@ class QuizzesListUI : MonoBehaviour
     public void Hide()
     {
         Root.style.display = DisplayStyle.None;
+        TextField.value = "";
     }
 }

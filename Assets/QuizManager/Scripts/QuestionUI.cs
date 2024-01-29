@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 
 class QuestionUI : MonoBehaviour
 {
-    public UIDocument UIDocument;
+    [SerializeField] private UIDocument UIDocument;
     [SerializeField] private QuizManager QuizManager;
-    public VisualElement Root { get => UIDocument.rootVisualElement; }
+    private VisualElement Root { get => UIDocument.rootVisualElement; }
     public event EventHandler<bool> OnAnswerSelected;
     private bool QuestionRuning = false;
     private readonly string[] difficultiesPtBr = { "Fácil", "Média", "Difícil" };

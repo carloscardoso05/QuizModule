@@ -41,7 +41,7 @@ class QuizManager : MonoBehaviour
         if (difficultyQuestions.Count == 0)
         {
             difficultyQuestions = Quiz.questions.Keys.Where((id) => Quiz.questions[id].difficulty == difficulty).ToList();
-            Debug.Log("Resetado difficuldade " + difficulty);
+            Debug.Log("Resetando difficuldade " + difficulty);
         }
         int index = UnityEngine.Random.Range(0, difficultyQuestions.Count);
         string questionId = difficultyQuestions.ElementAt(index);
