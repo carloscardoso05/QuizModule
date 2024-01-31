@@ -5,7 +5,6 @@ using UnityEngine;
 public class QuizManagerTester : MonoBehaviour
 {
     private QuizManager QuizManager;
-    int difficulty = 0;
     // Start is called before the first frame update
     void Start()
     {   
@@ -19,10 +18,15 @@ public class QuizManagerTester : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) {
             QuizManager.SelectQuiz();
         }
-        //Carregar questão (W)
+        //Carregar questões fácil, média e difícil (W, E, R)
         if (Input.GetKeyDown(KeyCode.W)) {
-            QuizManager.SelectQuestion(difficulty);
-            difficulty = (difficulty + 1) % 3;
+            QuizManager.SelectQuestion(0);
+        } else
+        if (Input.GetKeyDown(KeyCode.E)) {
+            QuizManager.SelectQuestion(1);
+        } else
+        if (Input.GetKeyDown(KeyCode.R)) {
+            QuizManager.SelectQuestion(2);
         }
     }
 }

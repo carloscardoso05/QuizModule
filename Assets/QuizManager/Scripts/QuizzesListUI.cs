@@ -9,7 +9,7 @@ class QuizzesListUI : MonoBehaviour
     [SerializeField] private UIDocument UIDocument;
     [SerializeField] private QuizProvider QuizProvider;
     private VisualElement Root { get => UIDocument.rootVisualElement; }
-    private ListView ListView { get => Root.Q<ListView>("QuizzesList"); }
+    public ListView ListView { get => Root.Q<ListView>("QuizzesList"); }
     private TextField TextField { get => Root.Q<TextField>("SearchQuiz"); }
     private List<Quiz> Quizzes = new();
     public event EventHandler<Quiz> OnQuizSelected;

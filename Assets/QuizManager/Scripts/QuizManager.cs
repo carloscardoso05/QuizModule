@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 class QuizManager : MonoBehaviour
 {
     private Quiz Quiz;
+    private bool answering = false;
+    public bool selectingQuiz = false;
     [SerializeField] private QuestionUI QuestionUI;
     [SerializeField] private QuizzesListUI QuizzesListUI;
     public event EventHandler<Question> OnChoseQuestion;
@@ -26,16 +29,23 @@ class QuizManager : MonoBehaviour
 
     private void HandleAnswer(object sender, bool correct)
     {
+        answering = false;
         Debug.Log(correct ? "Parabéns, você acertou" : "Você errou");
     }
 
     public void SelectQuiz()
     {
+        if (answering) {
+            throw new Exception("Não pode selecionar um quiz enquanto responde a uma questão");
+        }
         QuizzesListUI.Show();
+        QuizzesListUI.ListView.onItemsChosen += (_) => selectingQuiz = false;
+        selectingQuiz = true;
     }
 
     public void SelectQuestion(int difficulty)
     {
+        if (selectingQuiz) throw new Exception("Não pode responder uma questão enquanto seleciona um quiz");
         if (Quiz is null) throw new Exception("Nenhum Quiz foi selecionado ainda");
         List<string> difficultyQuestions = availableQuestions[difficulty];
         if (difficultyQuestions.Count == 0)
@@ -49,6 +59,7 @@ class QuizManager : MonoBehaviour
         difficultyQuestions.RemoveAt(index);
 
         OnChoseQuestion?.Invoke(this, question);
+        answering = true;
     }
 
 }
